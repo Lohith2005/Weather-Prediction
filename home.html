@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #a-active{
+            border: solid white 0.1rem;
+            border-radius: 20px;
+        }
+        #a-logout:hover{
+            background-color: red;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+          }
+          #a-logout:active{
+            border: solid white 0.1rem;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+          }
+          
+    </style>
+</head>
+<body>
+
+    <nav class="a">
+        <ul>
+            <li><a href="#" id="a-active">Home</a></li>
+            <li><a href="weather.html">Current Weather</a></li>
+            <li>
+                <a href="map.html">Weather Maps</a>
+                <!-- <div class="dropdown">
+                    <a href="map.html">Basic Weather Map</a>
+                     <a href="satellite-map.html">Satellite Map</a>
+                    <a href="radar-map.html">Radar Map</a> 
+                </div> -->
+            </li>
+            <li>
+                <a href="forecast.html">Forecast</a>
+                <!-- <div class="dropdown">
+                    <a href="forecast.html">5-Day Forecast</a>
+                </div> -->
+            </li>
+            <li><a href="previous-cautions.html">Air Pollution Info</a></li>
+            <li><a href="geocoding.html">Geocoding</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html" id="a-logout">Logout</a></li>
+        </ul>
+    </nav>
+    
+    <h1>Weather Dashboard</h1>
+
+    <main>
+        <h2>Welcome to the Weather Dashboard!</h2>
+        <p>Your one-stop solution for all weather-related information. Explore current conditions, forecasts, and more!</p>
+
+        <h3>Current Weather Section</h3> 
+        <section class="current-weather">
+            <div class="text">
+                <p>Stay informed with the latest weather updates, including temperature, humidity, wind speed, and overall weather conditions.</p>
+                <p>Users can receive real-time notifications for their current location or any other place they wish to monitor.</p>
+            </div>
+        </section>
+
+        <h3>5-Day Forecast Section</h3> 
+        <section class="forecast">
+            <div class="text">
+                <p>The 5-day forecast section displays the upcoming weather trends for the next five days. It shows temperatures, expected precipitation, and other weather details.</p>
+                <p>This helps users plan ahead, whether they are looking at daily temperature ranges or rain predictions for the next few days.</p>
+            </div>
+        </section>
+
+        <h3>Weather Map Section</h3>  
+        <section class="weather-map">
+            <div class="text">
+                <p>The weather map shows a graphical representation of weather patterns, such as high and low-pressure systems, rain zones, and wind directions.</p>
+                <p>This map helps users visualize where weather changes are happening and what areas are affected by different weather phenomena.</p>
+            </div>
+        </section>
+
+        <h3>Geocoding Section</h3>  
+        <section class="geocoding">
+            <div class="text">
+                <p>This section allows users to find weather information based on geographical coordinates or a specific location, like a city or country.</p>
+                <p>Users can input their current location or search for weather data in other places around the world.</p>
+            </div>
+        </section>
+
+        <h3>Air Pollution Section</h3>  
+        <section class="air-pollution">
+            <div class="text">
+                <p>This section provides information about air quality, including pollutant levels, air quality indexes, and health advisories.</p>
+                <p>Users can stay informed about air pollution levels in their area and take necessary precautions to protect their health.</p>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

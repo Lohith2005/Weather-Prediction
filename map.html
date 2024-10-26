@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 450px;
+            width: 100%;
+            border-radius: 20px;
+        }
+        #map-out{
+            width: 96%;
+            margin: 20px 2% 0 2%;
+            border: solid rgb(0, 0, 0) 2px;
+            border-radius: 20px;
+        }
+        #a-active{
+            border: solid white 0.1rem;
+            border-radius: 20px;
+        }
+        #a-logout:hover{
+            background-color: red;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+          }
+          #a-logout:active{
+            border: solid white 0.1rem;
+            border-radius: 20px;
+            color: white;
+            text-decoration: none;
+          }
+          
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="a">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="weather.html">Current Weather</a></li>
+            <li>
+                <a href="#" id="a-active">Weather Maps</a>
+                <!-- <div class="dropdown">
+                    <a href="map.html">Basic Weather Map</a>
+                     <a href="satellite-map.html">Satellite Map</a>
+                    <a href="radar-map.html">Radar Map</a> 
+                </div> -->
+            </li>
+            <li>
+                <a href="forecast.html">Forecast</a>
+                <!-- <div class="dropdown">
+                    <a href="forecast.html">5-Day Forecast</a>
+                </div> -->
+            </li>
+            <li><a href="previous-cautions.html">Air Pollution Info</a></li>
+            <li><a href="geocoding.html">Geocoding</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html" id="a-logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div id="map-out">
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Set up the map
+        var map = L.map('map').setView([51.505, -0.09], 5); // Coordinates for the center of the map (London)
+
+        // Add the base layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        // OpenWeatherMap API key and tile URL
+        const apiKey = '05f6f3affb0012e369c8c93f5bb0cfaa'; // Replace with your OpenWeatherMap API key
+        const weatherLayerUrl = `https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=${apiKey}`;
+
+        // Add the weather layer (Temperature layer from OpenWeatherMap)
+        L.tileLayer(weatherLayerUrl, {
+            maxZoom: 18,
+            attribution: 'Weather data © OpenWeatherMap'
+        }).addTo(map);
+    </script>
+</body>
+</html>

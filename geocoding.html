@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geocoding API Example</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #a-active{
+            border: solid white 0.1rem;
+            border-radius: 20px;
+        }
+.search {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    text-align: center;
+    width:min-content;
+  }
+  
+  .search__input {
+    font-family: inherit;
+    font-size: inherit;
+    background-color: #f4f2f2;
+    border: none;
+    color: #646464;
+    padding: 0.7rem 1rem;
+    border-radius: 30px;
+    width: 12em;
+    transition: all ease-in-out .5s;
+    margin-right: -2.3rem;
+  }
+  
+  .search__input:hover, .search__input:focus {
+    box-shadow: 0 0 1em #00000013;
+  }
+  
+  .search__input:focus {
+    outline: none;
+    background-color: #f0eeee;
+  }
+  
+  .search__input::-webkit-input-placeholder {
+    font-weight: 100;
+    color: #ccc;
+  }
+  
+  .search__input:focus + .search__button {
+    background-color: #f0eeee;
+  }
+  
+  .search__button {
+    border: none;
+    background-color: #f4f2f2;
+    margin-top: .1em;
+  }
+  
+  .search__button:hover {
+    cursor: pointer;
+  }
+  
+  .search__icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: #b4b4b4;
+  }
+    </style>
+</head>
+<body background="snow.jpg">
+    <nav class="a">
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="weather.html">Current Weather</a></li>
+            <li>
+                <a href="map.html">Weather Maps</a>
+                <!-- <div class="dropdown">
+                    <a href="map.html">Basic Weather Map</a>
+                     <a href="satellite-map.html">Satellite Map</a>
+                    <a href="radar-map.html">Radar Map</a> 
+                </div> -->
+            </li>
+            <li>
+                <a href="forecast.html" >Forecast</a>
+                <!-- <div class="dropdown">
+                    <a href="forecast.html">5-Day Forecast</a>
+                </div> -->
+            </li>
+            <li><a href="previous-cautions.html">Air Pollution Info</a></li>
+            <li><a href="#" id="a-active">Geocoding</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html" id="a-logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Geocoding API Example</h1>
+        <div class="search">
+            <input type="text" class="search__input" id="location-input" placeholder="Enter city or address">
+            <button class="search__button" id="search__button" onclick="getGeocode()">
+                <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
+                    <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                    </g>
+                </svg>
+            </button>
+        </div>
+
+
+        <div class="result">
+            <p><strong>Latitude:</strong> <span id="latitude"></span></p>
+            <p><strong>Longitude:</strong> <span id="longitude"></span></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('location-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                document.getElementById('search__button').click();
+            }
+        })
+        
+        const apiKey = '39a41a277b4a474c9bc1316104a2862d';
+
+        function getGeocode() {
+            const location = document.getElementById('location-input').value;
+            if (!location) {
+                alert('Please enter a location');
+                return;
+            }
+
+            const apiUrl = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${apiKey}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results && data.results.length > 0) {
+                        const lat = data.results[0].geometry.lat;
+                        const lng = data.results[0].geometry.lng;
+
+                        document.getElementById('latitude').textContent = lat;
+                        document.getElementById('longitude').textContent = lng;
+                    } else {
+                        alert('No results found');
+                    }
+                })
+                .catch(error => console.error('Error fetching geocoding data:', error));
+        }
+
+    </script>
+</body>
+</html>
